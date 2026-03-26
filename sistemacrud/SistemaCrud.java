@@ -19,7 +19,7 @@ public class SistemaCrud {
         
         Scanner input = new Scanner ( System.in );
         
-        //Primeira opção: Criar novos jogadores
+        
         
         int maxDeJogadores = 4;
         String[] jogadores = new String[maxDeJogadores];//Aqui eu defini uma array (isso serve para guardar um número definido de dados dentro de um mesmo espaço da memória)
@@ -31,7 +31,7 @@ public class SistemaCrud {
             
         
         
-        while (opcao != 6) 
+        while (opcao != 6) //Laço de repetição para voltar as opções principais do menu sempre que uma ação secundária for finalizada
         {
             //Menu de opções do sistema
             System.out.println("\n========= Menu do Game =========");
@@ -47,7 +47,9 @@ public class SistemaCrud {
             input.nextLine();
             
             switch (opcao) {
+            //Primeira opção: Criar novos jogadores
             case 1: 
+                
                 if (jogadoresCadastrados < maxDeJogadores) 
                 {
                     System.out.println("Escreva o nome do jogador: " );
@@ -60,29 +62,41 @@ public class SistemaCrud {
                 {
                     System.out.println("O número máximo de jogadores foi atingido, aguarde a próxima partida!");
                 }
-                break; 
-                
+                break;
+            //Segunda opção: Ver um jogador
             case 2: 
-                if ( jogadores == null )
+                if ( jogadoresCadastrados == 0 )
                     {
-                        System.out.println("Jogador não encontrado");
+                        System.out.println("Nenhum jogador foi cadastrado");
                     }
                 else 
                 {
                     System.out.println("Jogador 1 " + "Jogador 2 " + "Jogador 3 " + "Jogador 4");
-                    System.out.println("Escolha o jogador que quer ver: ");
-                    String opcaoJogador = input.next();
+                    System.out.println("Escolha o número do jogador que quer ver: ");
                     
-                switch (opcaoJogador) {
-                    case "Jogador 1" -> System.out.println(jogadoresCadastrados);
-                    case "Jogador 2" -> System.out.println(jogadoresCadastrados);
-                    case "jogador 3" -> System.out.println(jogadoresCadastrados);
-                    case "Jogador 4" -> System.out.println(jogadoresCadastrados);
-                    default -> System.out.println("Digite uma opção válida!");
-                }
+                    int opcaoJogador = input.nextInt();
+                    int indice = opcaoJogador - 1;
+                    
+                    if(indice >= 0 && indice < maxDeJogadores)
+                    {
+                        if(jogadores[indice] != null)
+                        {
+                            System.out.println("Nome do jogador: " + jogadores[indice]);
+                        }
+                        else
+                        {
+                            System.out.println("Esse jogador ainda não foi cadastrado");
+                        }
+                    }
+                    else
+                    {
+                        System.out.println("Opcao inválida");
+                    }
+                    
+                   
                 }
                 break;
-                
+            //Terceira opção: Ver a lista completa de jogadores    
             case 3: 
                 if ( jogadoresCadastrados == 0 )
                 {
